@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+	<title>Radioactive, Native FRP XKCD example</title>
+	<link rel="stylesheet" href="./style.css" type="text/css">
+</head>
+<body>
+	 <!--<button id="random">Random</button> TDB-->
+	<img class="pokemon">
+	<p>
+		<input id="input" value="pikachu">
+  </p>
+</body>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="./radioactive.min.js"></script>
+<script>
+		var pokemonURL = 'http://img.pokemondb.net/artwork/',
+		//charsURL = './chars.json',
+		//defaultChar = radioactive.cell('pikachu')
+		pokeMon = function(){
+			radioactive.react(function(){
+				  face = radioactive.data('#input');
+					$('.pokemon').error(function(ev){
+						$(this).hide();
+          }).load(function(){
+						$(this).show();
+					}).attr('src', pokemonURL + face() + '.jpg');
+			})
+		},
+		rand = function(){
+			chars = radioactive.data(charsURL);
+			chars[~~(Math.random() * chars.length)];
+			//TDB
+		}
+
+		$(function(){
+			pokeMon();
+		});
+</script>
+</html>
